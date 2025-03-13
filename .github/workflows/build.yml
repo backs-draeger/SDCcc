@@ -65,6 +65,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install AppImage tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y appimagetool
+
+      - name: Build AppImage
+        run: |
+          ./gradlew build -x test -Prevision=${{ env.RELEASE_VERSION }} -Pchangelist=${{ env.CHANGELIST }}
+          mkdir -p AppDir/usr/bin
+          cp sdccc/build/libs/* AppDir/usr/bin/
+          appimagetool AppDir SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage
+
+      - name: Collect AppImage artifact
+        run: |
+          mkdir -p sdccc/build/appimage
+          mv SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage sdccc/build/appimage/
+
       - name: Collect executable artifacts
         run: |
           mkdir sdccc/build/zip
