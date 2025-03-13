@@ -67,7 +67,7 @@ jobs:
 
       - name: Install AppImage tool
         run: |
-          sudo apt-get update
+          sudo apt-get update -y
           sudo apt-get install -y appimagetool
 
       - name: Build AppImage
