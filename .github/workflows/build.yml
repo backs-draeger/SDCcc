@@ -79,13 +79,13 @@ jobs:
           wget https://upload.wikimedia.org/wikipedia/commons/3/3e/Tree-256x256.png
           cp Tree-256x256.png AppDir/usr/share/icons/hicolor/256x256/apps/sdccc.png
           cat <<EOF > AppDir/usr/share/applications/sdccc.desktop
-      [Desktop Entry]
-      Name=SDCcc
-      Exec=sdccc
-      Icon=sdccc
-      Type=Application
-      Categories=Development;
-      EOF
+          [Desktop Entry]
+          Name=SDCcc
+          Exec=sdccc
+          Icon=sdccc
+          Type=Application
+          Categories=Development;
+          EOF
           cp sdccc/build/libs/* AppDir/usr/bin/
           ./appimagetool-x86_64.AppImage AppDir SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage
       - name: Collect AppImage artifact
