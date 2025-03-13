@@ -5,6 +5,8 @@ plugins {
     id("com.draeger.medical.java-conventions")
     id("com.draeger.medical.java-analysis")
     id("com.draeger.medical.kotlin-conventions")
+    // Add the jlink plugin to build a custom runtime and package as an AppImage
+    id("org.beryx.jlink") version "2.24.0"
 }
 
 val javaVersion = property("javaVersion").toString()
@@ -97,3 +99,30 @@ java {
         usingSourceSet(sourceSets.test.get())
     }
 }
+
+// --- Begin: jlink and jpackage configuration ---
+jlink {
+    // Name of the runtime image output
+    imageName = "SDCccImage"
+
+    // Create a launcher that becomes your executable
+    launcher {
+        name = "sdccc"
+    }
+
+    // jlink options to reduce runtime size
+    options = listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+
+    // Configure jpackage to build an AppImage for Linux.
+    // Ensure you are running on JDK 16+.
+    jpackage {
+        // "app-image" creates an unpackaged application image.
+        installerType = "app-image"
+        installerOptions = listOf(
+            "--app-version", project.version.toString(),
+            "--name", "SDCcc",
+            "--icon", "${project.projectDir}/src/main/resources/sdccc.png" // Ensure this icon exists
+        )
+    }
+}
+// --- End: jlink and jpackage configuration ---
