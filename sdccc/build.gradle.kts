@@ -6,7 +6,7 @@ plugins {
     id("com.draeger.medical.java-analysis")
     id("com.draeger.medical.kotlin-conventions")
     // Add the jlink plugin to build a custom runtime and package as an AppImage
-    id("org.beryx.jlink") version "2.24.0"
+    id("org.beryx.jlink")
 }
 
 val javaVersion = property("javaVersion").toString()
