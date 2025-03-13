@@ -75,22 +75,19 @@ jobs:
       - name: Build AppImage
         run: |
           ./gradlew build -x test -Prevision=${{ env.RELEASE_VERSION }} -Pchangelist=${{ env.CHANGELIST }}
-          mkdir -p AppDir/usr/bin
-          mkdir -p AppDir/usr/bin AppDir/usr/share/icons/hicolor/256x256/apps
+          mkdir -p AppDir/usr/bin AppDir/usr/share/icons/hicolor/256x256/apps AppDir/usr/share/applications
           wget https://upload.wikimedia.org/wikipedia/commons/3/3e/Tree-256x256.png
           cp Tree-256x256.png AppDir/usr/share/icons/hicolor/256x256/apps/sdccc.png
-          mkdir -p AppDir/usr/share/applications
-          cat << EOF > AppDir/usr/share/applications/sdccc.desktop
-          [Desktop Entry]
-          Name=SDCcc
-          Exec=sdccc
-          Icon=sdccc
-          Type=Application
-          Categories=Development;
-          EOF
+          cat <<EOF > AppDir/usr/share/applications/sdccc.desktop
+      [Desktop Entry]
+      Name=SDCcc
+      Exec=sdccc
+      Icon=sdccc
+      Type=Application
+      Categories=Development;
+      EOF
           cp sdccc/build/libs/* AppDir/usr/bin/
           ./appimagetool-x86_64.AppImage AppDir SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage
-
       - name: Collect AppImage artifact
         run: |
           mkdir -p sdccc/build/appimage
