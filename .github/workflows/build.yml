@@ -67,15 +67,15 @@ jobs:
 
       - name: Install AppImage tool
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y appimagetool
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
 
       - name: Build AppImage
         run: |
           ./gradlew build -x test -Prevision=${{ env.RELEASE_VERSION }} -Pchangelist=${{ env.CHANGELIST }}
           mkdir -p AppDir/usr/bin
           cp sdccc/build/libs/* AppDir/usr/bin/
-          appimagetool AppDir SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage
+          ./appimagetool-x86_64.AppImage AppDir SDCcc-${{ env.RELEASE_VERSION }}${{ env.CHANGELIST }}.AppImage
 
       - name: Collect AppImage artifact
         run: |
