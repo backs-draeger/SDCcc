@@ -49,6 +49,7 @@ public class CommandLineOptions {
     private static final String NO_SUBDIRECTORIES = "no_subdirectories";
     private static final String FILE_LOG_LEVEL = "file_log_level";
     private static final String VERSION = "version";
+    private static final String PLAIN_LOG = "plain";
     private final Path configPath;
     private final Path testConfigPath;
     private final Path testParameterPath;
@@ -63,6 +64,7 @@ public class CommandLineOptions {
     private final String testRunDirectory;
     private final Boolean noSubdirectories;
     private final Level fileLogLevel;
+    private final boolean plainLog;
 
     /**
      * Parse the command line options passed.
@@ -115,6 +117,7 @@ public class CommandLineOptions {
         this.testRunDirectory = cmd.getOptionValue(TEST_RUN_DIRECTORY);
         this.noSubdirectories = Boolean.parseBoolean(cmd.getOptionValue(NO_SUBDIRECTORIES));
         this.fileLogLevel = Level.toLevel(cmd.getOptionValue(FILE_LOG_LEVEL), Level.INFO);
+        this.plainLog = cmd.hasOption(PLAIN_LOG);
     }
 
     private void printVersion() {
@@ -154,8 +157,17 @@ public class CommandLineOptions {
             version.setRequired(false);
             options.addOption(version);
         }
+        {
+            final String description = "If present, use plain text log output (no compression).";
+            final var plainLogOpt = new Option(null, PLAIN_LOG, false, description);
+            plainLogOpt.setRequired(false);
+            options.addOption(plainLogOpt);
+        }
         return options;
+        public boolean isPlainLog() {
+        return plainLog;
     }
+}
 
     private Options setupOptions() {
         final var options = new Options();

@@ -757,14 +757,20 @@ public class TestSuite {
             }
         }
         final var logConfig = LoggingConfigurator.loggerConfig(testRunDir, cmdLine.getFileLogLevel());
-        checkLogConfig(logConfig);
+
+        // Set Log4j file pattern based on command-line parameter.
+        if (cmdLine.isPlainLog()) {
+            Configurator.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log");
+        } else {
+            Configurator.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log.zip");
+        }
 
         try (final var ignored = Configurator.initialize(logConfig)) {
-            final var ctx = (LoggerContext) LogManager.getContext(false);
-            ctx.setConfiguration(logConfig);
-            ctx.updateLoggers();
-            // we can only log this after setting up the logger
-            LOG.info("Using test run directory {}", testRunDir);
+        final var ctx = (LoggerContext) LogManager.getContext(false);
+        ctx.setConfiguration(logConfig);
+        ctx.updateLoggers();
+        // we can only log this after setting up the logger
+        LOG.info("Using test run directory {}", testRunDir);
 
             try {
                 setupSwingTheme();
