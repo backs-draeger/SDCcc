@@ -157,17 +157,8 @@ public class CommandLineOptions {
             version.setRequired(false);
             options.addOption(version);
         }
-        {
-            final String description = "If present, use plain text log output (no compression).";
-            final var plainLogOpt = new Option(null, PLAIN_LOG, false, description);
-            plainLogOpt.setRequired(false);
-            options.addOption(plainLogOpt);
-        }
         return options;
-        public boolean isPlainLog() {
-        return plainLog;
     }
-}
 
     private Options setupOptions() {
         final var options = new Options();
@@ -263,6 +254,12 @@ public class CommandLineOptions {
             fileLogLevelOpt.setRequired(false);
             options.addOption(fileLogLevelOpt);
         }
+        {
+            final String description = "If present, use plain text log output (no compression).";
+            final var plainLogOpt = new Option(null, PLAIN_LOG, false, description);
+            plainLogOpt.setRequired(false);
+            options.addOption(plainLogOpt);
+        }
         return options;
     }
 
@@ -334,6 +331,10 @@ public class CommandLineOptions {
 
     public Level getFileLogLevel() {
         return this.fileLogLevel;
+    }
+
+    public boolean isPlainLog() {
+        return plainLog;
     }
 
     private static void printNetworkAdapterInformation() throws SocketException {
