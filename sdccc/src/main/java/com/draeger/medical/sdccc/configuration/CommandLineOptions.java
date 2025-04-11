@@ -157,8 +157,8 @@ public class CommandLineOptions {
             version.setRequired(false);
             options.addOption(version);
         }
-                return options;
-        }
+        return options;
+    }
 
     private Options setupOptions() {
         final var options = new Options();
@@ -254,9 +254,9 @@ public class CommandLineOptions {
             fileLogLevelOpt.setRequired(false);
             options.addOption(fileLogLevelOpt);
         }
-{
+        {
             final String description = "If present, use plain text log output (no compression).";
-            final var plainLogOpt = new Option("plain", PLAIN_LOG, false, description);
+            final var plainLogOpt = new Option("zip", PLAIN_LOG, false, description);
             plainLogOpt.setRequired(false);
             plainLogOpt.setType(Boolean.class);
             options.addOption(plainLogOpt);
@@ -334,7 +334,12 @@ public class CommandLineOptions {
         return this.fileLogLevel;
     }
 
-    public boolean isPlainLog() {
+    /**
+     * Checks if plain logging is enabled.
+     *
+     * @return {@code true} if plain logging is enabled, {@code false} otherwise.
+     */
+    public Boolean isPlainLog() {
         return plainLog;
     }
 
@@ -363,3 +368,4 @@ public class CommandLineOptions {
         }
     }
 }
+// spotless:on
