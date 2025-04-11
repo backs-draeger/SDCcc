@@ -117,7 +117,7 @@ public class CommandLineOptions {
         this.testRunDirectory = cmd.getOptionValue(TEST_RUN_DIRECTORY);
         this.noSubdirectories = Boolean.parseBoolean(cmd.getOptionValue(NO_SUBDIRECTORIES));
         this.fileLogLevel = Level.toLevel(cmd.getOptionValue(FILE_LOG_LEVEL), Level.INFO);
-        this.plainLog = Boolean.parseBoolean(cmd.getOptionValue(PLAIN_LOG);
+        this.plainLog = Boolean.parseBoolean(cmd.getOptionValue(PLAIN_LOG));
     }
 
     private void printVersion() {
