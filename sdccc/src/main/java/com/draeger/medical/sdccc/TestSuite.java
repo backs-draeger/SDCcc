@@ -766,11 +766,11 @@ public class TestSuite {
         }
 
         try (final var ignored = Configurator.initialize(logConfig)) {
-        final var ctx = (LoggerContext) LogManager.getContext(false);
-        ctx.setConfiguration(logConfig);
-        ctx.updateLoggers();
-        // we can only log this after setting up the logger
-        LOG.info("Using test run directory {}", testRunDir);
+            final var ctx = (LoggerContext) LogManager.getContext(false);
+            ctx.setConfiguration(logConfig);
+            ctx.updateLoggers();
+            // we can only log this after setting up the logger
+            LOG.info("Using test run directory {}", testRunDir);
 
             try {
                 setupSwingTheme();
