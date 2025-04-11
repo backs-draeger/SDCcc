@@ -334,12 +334,7 @@ public class CommandLineOptions {
         return this.fileLogLevel;
     }
 
-    /**
-     * Checks if plain logging is enabled.
-     *
-     * @return {@code true} if plain logging is enabled, {@code false} otherwise.
-     */
-    public Boolean isPlainLog() {
+    public Boolean getPlainLog() {
         return plainLog;
     }
 

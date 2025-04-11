@@ -759,7 +759,7 @@ public class TestSuite {
         final var logConfig = LoggingConfigurator.loggerConfig(testRunDir, cmdLine.getFileLogLevel());
 
         // Set Log4j file pattern based on command-line parameter.
-        if (cmdLine.isPlainLog()) {
+        if (cmdLine.getPlainLog()) {
             System.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log");
         } else {
             System.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log.zip");
