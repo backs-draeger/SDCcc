@@ -760,9 +760,9 @@ public class TestSuite {
 
         // Set Log4j file pattern based on command-line parameter.
         if (cmdLine.isPlainLog()) {
-            Configurator.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log");
+            System.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log");
         } else {
-            Configurator.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log.zip");
+            System.setProperty("log4j.appender.rolling.filePattern", "logs/app-%d{yyyy-MM-dd}.log.zip");
         }
 
         try (final var ignored = Configurator.initialize(logConfig)) {
